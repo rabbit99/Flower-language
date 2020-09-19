@@ -38,6 +38,7 @@ public class FlowerCanvas : MonoBehaviour
             quickKeyPrefab.transform.SetParent(QuickKeyTransform);
             RectTransform healthIconRect = quickKeyPrefab.transform as RectTransform;
             QuickKeys.Add(quickKeyPrefab.GetComponent<QuickKey>());
+            quickKeyPrefab.transform.localScale = Vector3.one;
             //healthIconRect.anchoredPosition = Vector2.zero;
             //healthIconRect.sizeDelta = Vector2.zero;
             //healthIconRect.anchorMin -= new Vector2(k_KeyIconAnchorWidth, 0f) * i;

@@ -314,14 +314,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5821938769072298052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9630ef9434df4048aafe7bffcc5bc1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 113059c1f138b9f4fbd9ce79cbac7b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundedLayerMask:
     serializedVersion: 2
     m_Bits: 2147549184
   groundedRaycastDistance: 0.1
-  speed: 0.1
+  speed: 2
 --- !u!114 &5863633230239643550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,10 +331,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5821938769072298052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeecda2baef25704c8fe802e627e9f27, type: 3}
+  m_Script: {fileID: 11500000, guid: 43cd916f36b796c44802ebb25ed745ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 2
   Pause:
     key: 27
     controllerButton: 8
@@ -346,11 +346,11 @@ MonoBehaviour:
   MeleeAttack:
     key: 107
     controllerButton: 3
-    m_Enabled: 0
+    m_Enabled: 1
   RangedAttack:
     key: 111
-    controllerButton: 10
-    m_Enabled: 0
+    controllerButton: 2
+    m_Enabled: 1
   Jump:
     key: 32
     controllerButton: 1
@@ -359,12 +359,14 @@ MonoBehaviour:
     positive: 100
     negative: 97
     controllerAxis: 1
+    variableJoystick: {fileID: 0}
   Vertical:
     positive: 119
     negative: 115
     controllerAxis: 2
+    variableJoystick: {fileID: 0}
   dataSettings:
-    dataTag: PlayerInput
+    dataTag: bf6bd781-362a-4799-b573-b6dc4723ab9b
     persistenceType: 3
   m_canClimb: 0
 --- !u!114 &5859282803092878632
@@ -376,7 +378,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5821938769072298052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49de84fa3d321d245bc900e599de015f, type: 3}
+  m_Script: {fileID: 11500000, guid: e785f6db605d8a247b76e638218ffbd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5925340339256133462}
@@ -398,16 +400,16 @@ MonoBehaviour:
   hurtJumpAngle: 45
   hurtJumpSpeed: 8
   flickeringDuration: 0.05
-  meleeAttackDashSpeed: 15
-  dashWhileAirborne: 1
+  meleeAttackDashSpeed: 5
+  dashWhileAirborne: 0
   footstepAudioPlayer: {fileID: 5863225624297432222}
   landingAudioPlayer: {fileID: 5863336772081941520}
   hurtAudioPlayer: {fileID: 5863269290156733418}
   meleeAttackAudioPlayer: {fileID: 5863346763143688126}
   rangedAttackAudioPlayer: {fileID: 5863559516149731128}
-  shotsPerSecond: 2
-  bulletSpeed: 30
-  holdingGunTimeoutDuration: 1.5
+  shotsPerSecond: 1
+  bulletSpeed: 5
+  holdingGunTimeoutDuration: 10
   rightBulletSpawnPointAnimated: 1
   cameraHorizontalFacingOffset: 2
   cameraHorizontalSpeedOffset: 0.2
@@ -416,6 +418,7 @@ MonoBehaviour:
   maxVerticalDeltaDampTime: 0.6
   verticalCameraOffsetDelay: 1
   spriteOriginallyFacesLeft: 0
+  variableJoystick: {fileID: 0}
 --- !u!114 &5863567676333983554
 MonoBehaviour:
   m_ObjectHideFlags: 0
