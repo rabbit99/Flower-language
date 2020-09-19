@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cd916f36b796c44802ebb25ed745ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 2
+  inputType: 0
   Pause:
     key: 27
     controllerButton: 8
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5821938769072298052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 960138f0450083543ad1d17e1352019d, type: 3}
+  m_Script: {fileID: 11500000, guid: eff2791e3a59c554f81afd9f5d29daa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 1
@@ -440,16 +440,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: ChangeHitPointUI
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnBeforeTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -463,7 +466,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
   OnDie:
     m_PersistentCalls:
       m_Calls:
@@ -477,12 +480,12 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
   OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
   dataSettings:
-    dataTag: PlayerHealth
+    dataTag: b10fbc5b-e885-4ed8-9c34-b2920713a2ac
     persistenceType: 3
 --- !u!114 &5863394110764275178
 MonoBehaviour:

@@ -866,7 +866,7 @@ namespace Gamekit2D
                 case "FireWall":
                     return onCactusBuff;
             }
-            return true;
+            return false;
         }
 
         IEnumerator _useItem(string itemName)
