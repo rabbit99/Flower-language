@@ -64,6 +64,8 @@ namespace Gamekit2D
 
         public bool spriteOriginallyFacesLeft;
 
+        public VariableJoystick variableJoystick;
+
         protected CharacterController2D m_CharacterController2D;
         protected Animator m_Animator;
         protected CapsuleCollider2D m_Capsule;
@@ -209,6 +211,10 @@ namespace Gamekit2D
 
         void FixedUpdate()
         {
+            //Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
+            //Vector2 dir_v2 = new Vector2(direction.x, direction.z);
+            //Debug.Log("dir_v2 = " + dir_v2);
+            //m_MoveVector += dir_v2;
             m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
             m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
             m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
