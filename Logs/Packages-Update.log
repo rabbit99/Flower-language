@@ -73,3 +73,12 @@ The following packages were updated:
   com.unity.xr.legacyinputhelpers from version 2.0.2 to 2.1.4
 The following packages were removed:
   com.unity.package-manager-ui@2.2.0
+
+=== Sat Sep 19 19:36:58 2020
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were updated:
+  com.unity.postprocessing from version 2.2.2 to 2.3.0
+  com.unity.timeline from version 1.2.6 to 1.2.14

@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 20
-  productGUID: 9b32773481862c043a8db000c9518222
+  productGUID: 00000000000000000000000000000000
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -156,7 +156,7 @@ PlayerSettings:
       dashSupport: 1
       lowOverheadMode: 0
       protectedContext: 0
-      v2Signing: 0
+      v2Signing: 1
     enable360StereoCapture: 0
   isWsaHolographicRemotingEnabled: 0
   enableFrameTimingStats: 0
@@ -246,7 +246,7 @@ PlayerSettings:
   iOSRequireARKit: 0
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
-  clonedFromGUID: 297c4203404c8894f8343800abb1cdb5
+  clonedFromGUID: ec801c048bc9d934c9df2f18791cc199
   templatePackageId: 
   templateDefaultScene: 
   AndroidTargetArchitectures: 5
@@ -303,8 +303,6 @@ PlayerSettings:
   - m_BuildTarget: XboxOnePlayer
     m_GraphicsJobs: 0
   - m_BuildTarget: LuminSupport
-    m_GraphicsJobs: 0
-  - m_BuildTarget: CloudRendering
     m_GraphicsJobs: 0
   - m_BuildTarget: AndroidPlayer
     m_GraphicsJobs: 0
@@ -643,7 +641,6 @@ PlayerSettings:
     27: UNITY_POST_PROCESSING_STACK_V1;UNITY_POST_PROCESSING_STACK_V2
     28: UNITY_POST_PROCESSING_STACK_V2
     29: UNITY_POST_PROCESSING_STACK_V2
-    30: UNITY_POST_PROCESSING_STACK_V2
   platformArchitecture: {}
   scriptingBackend:
     Standalone: 0
