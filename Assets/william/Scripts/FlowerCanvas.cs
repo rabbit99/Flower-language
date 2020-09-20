@@ -70,6 +70,7 @@ public class FlowerCanvas : MonoBehaviour
                 if(setQuickKeyIndex < QuickKeys.Count)
                 {
                     QuickKeys[setQuickKeyIndex].btnImage.sprite = go;
+                    QuickKeys[setQuickKeyIndex].keyName = itemName;
                     setQuickKeyIndex++;
                 }
             }

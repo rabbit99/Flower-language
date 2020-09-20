@@ -747,7 +747,7 @@ namespace Gamekit2D
         {
             m_Animator.SetTrigger(m_HashDeadPara);
 
-            StartCoroutine(DieRespawnCoroutine(true, false));
+            StartCoroutine(DieRespawnCoroutine(true, true));
         }
 
         IEnumerator DieRespawnCoroutine(bool resetHealth, bool useCheckPoint)

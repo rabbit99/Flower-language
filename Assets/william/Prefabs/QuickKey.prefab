@@ -188,16 +188,16 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 6599655666749076338}
+  m_TargetGraphic: {fileID: 5731805719327854780}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 3862748285548883160}
+        m_MethodName: UseQuickKey
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -254,3 +254,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnImage: {fileID: 5731805719327854780}
+  keyName: 

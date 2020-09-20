@@ -29,13 +29,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/2DGamekit/Scenes/UI/Loading.unity
     guid: ebc4647ff02971c4ba1b207af066be4d
-  - enabled: 1
+  - enabled: 0
     path: Assets/william/Scenes/Main.unity
     guid: 1820d81501eaa604b8415372b1c54de4
   - enabled: 1
-    path: Assets/william/Scenes/stage_1.unity
-    guid: 8a9f1a3886fd39b4d8eaff85ff1f6530
-  - enabled: 1
     path: Assets/william/Scenes/Start 1.unity
     guid: 223ed02799291064e89fb5e928376366
+  - enabled: 1
+    path: Assets/william/Scenes/stage_1.unity
+    guid: 8a9f1a3886fd39b4d8eaff85ff1f6530
   m_configObjects: {}

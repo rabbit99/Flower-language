@@ -64,8 +64,8 @@ namespace Gamekit2D
             {
                 moveMent = new Vector2
                 {
-                    x = Input.GetAxis("Horizontal") * speed,
-                    y = Input.GetAxis("Vertical") * speed,
+                    x = PlayerInput.Instance.Horizontal.Value * speed,
+                    y = PlayerInput.Instance.Vertical.Value * speed,
                 };
                 m_PreviousPosition = m_Rigidbody2D.position;
                 m_CurrentPosition = m_PreviousPosition + moveMent;
