@@ -34,5 +34,10 @@ Assets/StreamingAssets/Standalone/
 Assets/StreamingAssets/build_info.txt
 Assets/StreamingAssets/build_info.txt.meta
 
-2DGamekit/
-
+Assets/2DGamekit/Art
+Assets/2DGamekit/Audio
+Assets/2DGamekit/Documentation
+Assets/2DGamekit/Scenes
+Assets/2DGamekit/Utilities/Fonts
+Assets/2DGamekit/Utilities/TextMesh Pro
+!Assets/2DGamekit/Scripts/
