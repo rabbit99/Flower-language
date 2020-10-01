@@ -99,6 +99,7 @@ namespace Gamekit2D
         protected readonly int m_HashHorizontalSpeedPara = Animator.StringToHash("HorizontalSpeed");
         protected readonly int m_HashVerticalSpeedPara = Animator.StringToHash("VerticalSpeed");
         protected readonly int m_HashGroundedPara = Animator.StringToHash("Grounded");
+        protected readonly int m_HashClimbingPara = Animator.StringToHash("Climbing");
         protected readonly int m_HashCrouchingPara = Animator.StringToHash("Crouching");
         protected readonly int m_HashPushingPara = Animator.StringToHash("Pushing");
         protected readonly int m_HashTimeoutPara = Animator.StringToHash("Timeout");
@@ -116,8 +117,9 @@ namespace Gamekit2D
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
 
-        private bool onCactusBuff = false; 
-
+        private bool onCactusBuff = false;
+        private float fallingDistance = 0;
+        private float lastStandPosY = 0;
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
         {
@@ -216,8 +218,17 @@ namespace Gamekit2D
             //Debug.Log("dir_v2 = " + dir_v2);
             //m_MoveVector += dir_v2;
             m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
-            m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
-            m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
+            if (!m_CharacterController2D.climbing)
+            {
+                m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
+                m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
+            }
+            else
+            {
+                m_Animator.SetFloat(m_HashHorizontalSpeedPara, 0);
+                m_Animator.SetFloat(m_HashVerticalSpeedPara, 0);
+            }
+
             UpdateBulletSpawnPointPositions();
             UpdateCameraFollowTargetPosition();
         }
@@ -380,6 +391,7 @@ namespace Gamekit2D
 
         public void GroundedVerticalMovement()
         {
+            //Debug.Log("GroundedVerticalMovement" + gravity);
             m_MoveVector.y -= gravity * Time.deltaTime;
 
             if (m_MoveVector.y < -gravity * Time.deltaTime * k_GroundedStickingVelocityMultiplier)
@@ -443,6 +455,7 @@ namespace Gamekit2D
 
         public void CheckForCrouching()
         {
+            if(!CheckForClimbed() && CheckForGrounded())
             m_Animator.SetBool(m_HashCrouchingPara, PlayerInput.Instance.Vertical.Value < 0f);
         }
 
@@ -458,14 +471,60 @@ namespace Gamekit2D
                 if (!wasGrounded && m_MoveVector.y < -1.0f)
                 {//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
                     landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
+                    fallingDistance = lastStandPosY - transform.position.y;
+                    Debug.Log("fallingDistance = " + fallingDistance);
+                    if (Mathf.Abs(fallingDistance) > 3)
+                    {
+                        Debug.Log("falling hurt");
+                        damageable.TakeDamage(meleeDamager);
+                        lastStandPosY = 0;
+                    }
+                    fallingDistance = 0;
                 }
             }
             else
+            {
+                if (wasGrounded)
+                {
+                    lastStandPosY = transform.position.y;
+                    Debug.Log("lastStandPosY  = " + lastStandPosY);
+                }
                 m_CurrentSurface = null;
+                
+            }
+                
 
             m_Animator.SetBool(m_HashGroundedPara, grounded);
 
             return grounded;
+        }
+
+        public bool CheckForClimbed()
+        {
+            bool wasClimbed = m_Animator.GetBool(m_HashClimbingPara);
+            bool climbed = m_CharacterController2D.climbing;
+
+            if (climbed)
+            {
+                //FindCurrentSurface();
+                lastStandPosY = transform.position.y;
+                //if (!wasClimbed && m_MoveVector.y < -1.0f)
+                //{//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
+                //    landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
+                //}
+            }
+            else
+            {
+                m_CurrentSurface = null;
+                
+            }  
+
+            if(wasClimbed != climbed)
+                m_MoveVector = Vector2.zero;
+
+            m_Animator.SetBool(m_HashClimbingPara, climbed);
+
+            return climbed;
         }
 
         public void FindCurrentSurface()
@@ -546,8 +605,10 @@ namespace Gamekit2D
 
         public void UpdateJump()
         {
+            
             if (!PlayerInput.Instance.Jump.Held && m_MoveVector.y > 0.0f)
             {
+                Debug.Log("UpdateJump");
                 m_MoveVector.y -= jumpAbortSpeedReduction * Time.deltaTime;
             }
         }
@@ -710,7 +771,7 @@ namespace Gamekit2D
             //    Debug.Log("Hurt by FireWall");
             //    return;
             //}
-
+            Debug.Log("damager = " + damager.name);
             UpdateFacing(damageable.GetDamageDirection().x > 0f);
             damageable.EnableInvulnerability();
 

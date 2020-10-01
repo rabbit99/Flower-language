@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Gamekit2D
 {
@@ -12,6 +13,11 @@ namespace Gamekit2D
         [Tooltip("The distance down to check for ground.")]
         public float groundedRaycastDistance = 0.1f;
 
+        public float checkRadius = 0.3f;
+        public LayerMask ladderMask;
+        public float upOffset = 0;
+        public float downOffset = -2.5f;
+        public Tilemap ladderTileMap;
         Rigidbody2D m_Rigidbody2D;
         CapsuleCollider2D m_Capsule;
         Vector2 m_PreviousPosition;
@@ -31,7 +37,8 @@ namespace Gamekit2D
         public ContactFilter2D ContactFilter { get { return m_ContactFilter; } }
 
         private Vector2 moveMent = new Vector3();
-        private bool canClimb = false;
+        public bool climbing = false;
+        private bool canMove = true;
         public float speed = 2f;
         void Awake()
         {
@@ -60,31 +67,78 @@ namespace Gamekit2D
 
         void FixedUpdate()
         {
-            if (canClimb)
+            if (canMove)
             {
-                moveMent = new Vector2
-                {
-                    x = PlayerInput.Instance.Horizontal.Value * speed,
-                    y = PlayerInput.Instance.Vertical.Value * speed,
-                };
-                m_PreviousPosition = m_Rigidbody2D.position;
-                m_CurrentPosition = m_PreviousPosition + moveMent;
-                m_Rigidbody2D.MovePosition(m_CurrentPosition);
-                m_NextMovement = Vector2.zero;
-            }
-            else
-            {
+                //m_Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
                 m_PreviousPosition = m_Rigidbody2D.position;
                 m_CurrentPosition = m_PreviousPosition + m_NextMovement;
                 Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
 
                 m_Rigidbody2D.MovePosition(m_CurrentPosition);
                 m_NextMovement = Vector2.zero;
+                CheckCapsuleEndCollisions();
+                CheckCapsuleEndCollisions(false);
+            }
+            bool up = Physics2D.OverlapCircle(m_Rigidbody2D.position  + new Vector2(0, upOffset), checkRadius, ladderMask);
+            bool down = Physics2D.OverlapCircle(m_Rigidbody2D.position  + new Vector2(0, downOffset), checkRadius, ladderMask);
+            if (!m_Capsule)
+                return;
+            if (m_Capsule.IsTouchingLayers(ladderMask))
+            {
+                if (PlayerInput.Instance.Vertical.Value == 1f || PlayerInput.Instance.Vertical.Value == -1f)
+                {
+                    if (!climbing)
+                    {
+                        Vector3Int cellPosition = ladderTileMap.WorldToCell(transform.position);
+                        Vector3 _v = ladderTileMap.GetCellCenterWorld(cellPosition);
+                        transform.position = new Vector2(_v.x, m_Rigidbody2D.position.y);
+                    }
+                    climbing = true;
+                    canMove = false;
+                    m_Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                }
+                m_NextMovement = Vector2.zero;
             }
 
+            if (climbing)
+            {
+                if (!up && PlayerInput.Instance.Vertical.Value >= 0)
+                {
+                    Debug.Log("!up *** up = " + up + "  Vertical.Value = " + PlayerInput.Instance.Vertical.Value);
+                    FinishClimb();
+                    return;
+                }
 
-            CheckCapsuleEndCollisions();
-            CheckCapsuleEndCollisions(false);
+                if (!down && PlayerInput.Instance.Vertical.Value <= 0)
+                {
+                    Debug.Log("!down *** down = "+ down + "  Vertical.Value = " + PlayerInput.Instance.Vertical.Value);
+                    FinishClimb();
+                    return;
+                }
+                
+                moveMent = new Vector2
+                {
+                    x = 0,
+                    y = PlayerInput.Instance.Vertical.Value * speed,
+                };
+                m_PreviousPosition = m_Rigidbody2D.position;
+                m_CurrentPosition = m_PreviousPosition + moveMent;
+                m_Rigidbody2D.MovePosition(m_CurrentPosition);
+                IsCeilinged = true;
+                m_NextMovement = Vector2.zero;
+
+                if (PlayerInput.Instance.Jump.Down)
+                {
+                    FinishClimb();
+                }
+            }
+        }
+
+        void FinishClimb()
+        {
+            climbing = false;
+            m_Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            canMove = true;
         }
 
         /// <summary>
@@ -93,6 +147,7 @@ namespace Gamekit2D
         /// <param name="movement">The amount moved in global coordinates relative to the rigidbody2D's position.</param>
         public void Move(Vector2 movement)
         {
+            //Debug.Log("movement = " + movement);
             m_NextMovement += movement;
         }
 
@@ -269,7 +324,7 @@ namespace Gamekit2D
                 Debug.Log("(string)_noti.data" + (string)_noti.data);
                 if ((string)_noti.data == this.gameObject.name)
                 {
-                    canClimb = true;
+                    climbing = true;
                     //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 }
             }
@@ -278,10 +333,21 @@ namespace Gamekit2D
                 Debug.Log("(string)_noti.data" + (string)_noti.data);
                 if ((string)_noti.data == this.gameObject.name)
                 {
-                    canClimb = false;
+                    climbing = false;
                     //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 }
             }
         }
+        //private void OnDrawGizmos()
+        //{
+        //    //Função que mostra os raios de colisão que fazem a checagem com a escada
+
+        //    Gizmos.color = Color.red;
+        //    //if (!m_Rigidbody2D || m_Capsule)
+        //    //    return;
+        //    Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, upOffset), checkRadius);
+        //    Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, downOffset), checkRadius);
+        //}
     }
+
 }

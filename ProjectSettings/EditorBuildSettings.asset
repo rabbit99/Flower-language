@@ -37,5 +37,8 @@ EditorBuildSettings:
     guid: 223ed02799291064e89fb5e928376366
   - enabled: 1
     path: Assets/william/Scenes/stage_1.unity
+    guid: e1cc853654e2b014ea46354ade40bcbc
+  - enabled: 1
+    path: Assets/william/Scenes/stage_2.unity
     guid: 8a9f1a3886fd39b4d8eaff85ff1f6530
   m_configObjects: {}
