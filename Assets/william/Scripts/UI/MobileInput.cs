@@ -5,5 +5,6 @@ using UnityEngine;
 public class MobileInput : MonoBehaviour
 {
     public static bool JumpDown = false;
-
+    public static bool JumpHeld = false;
+    public static bool JumpUp = false;
 }

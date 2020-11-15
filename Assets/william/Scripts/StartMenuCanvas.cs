@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class StartMenuCanvas : MonoBehaviour
 {
+    public GameObject CollectionGalleryObj;
+    public TransitionPoint TransitionPoint;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -17,8 +18,26 @@ public class StartMenuCanvas : MonoBehaviour
         
     }
 
-    public void TransitionToScene(TransitionPoint transitionPoint)
+    public void StartNewGame()
     {
-        SceneController.TransitionToScene(transitionPoint);
+        TransitionPoint.transitionType = TransitionPoint.TransitionType.DifferentZone;
+        TransitionPoint.newSceneName = "stage_1";
+        TransitionPoint.transitionDestinationTag = SceneTransitionDestination.DestinationTag.A;
+        SceneController.TransitionToScene(TransitionPoint);
+        Services.Get<DataManager>().CreateNewPlayerData();
+        Services.Get<DataManager>().SetSavePoint("stage_1", SceneTransitionDestination.DestinationTag.A);
+    }
+
+    public void ContinueGame()
+    {
+        TransitionPoint.transitionType = TransitionPoint.TransitionType.DifferentZone;
+        TransitionPoint.newSceneName = Services.Get<DataManager>().PlayerData.saveSceneName;
+        TransitionPoint.transitionDestinationTag = Services.Get<DataManager>().PlayerData.saveTransitionDestinationTag;
+        SceneController.TransitionToScene(TransitionPoint);
+    }
+
+    public void OpenCollectionGallery()
+    {
+        CollectionGalleryObj.SetActive(true);
     }
 }

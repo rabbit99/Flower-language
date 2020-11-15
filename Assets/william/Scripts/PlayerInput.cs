@@ -2,7 +2,7 @@
 
 namespace Gamekit2D
 {
-    public class PlayerInput : InputComponent, IDataPersister, INotification
+    public class PlayerInput : InputComponent, IDataPersister
     {
         public static PlayerInput Instance
         {
@@ -46,7 +46,6 @@ namespace Gamekit2D
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
 
             PersistentDataManager.RegisterPersister(this);
-            AddNotificationObserver();
         }
 
         void OnDisable()
@@ -54,7 +53,6 @@ namespace Gamekit2D
             PersistentDataManager.UnregisterPersister(this);
 
             s_Instance = null;
-            RemoveNotificationObserver();
         }
 
         protected override void GetInputs(bool fixedUpdateHappened)
@@ -184,36 +182,6 @@ namespace Gamekit2D
             }
         }
 
-        void AddNotificationObserver()
-        {
-            NotificationCenter.Default.AddObserver(this, NotificationKeys.InTheLadder);
-            NotificationCenter.Default.AddObserver(this, NotificationKeys.OutTheLadder);
-        }
 
-        void RemoveNotificationObserver()
-        {
-            NotificationCenter.Default.RemoveObserver(this, NotificationKeys.InTheLadder);
-            NotificationCenter.Default.RemoveObserver(this, NotificationKeys.OutTheLadder);
-        }
-
-        public void OnNotify(Notification _noti)
-        {
-            if (_noti.name == NotificationKeys.InTheLadder)
-            {
-                Debug.Log("(string)_noti.data" + (string)_noti.data);
-                if ((string)_noti.data == this.gameObject.name)
-                {
-                    m_canClimb = true;
-                }
-            }
-            if (_noti.name == NotificationKeys.OutTheLadder)
-            {
-                Debug.Log("(string)_noti.data" + (string)_noti.data);
-                if ((string)_noti.data == this.gameObject.name)
-                {
-                    m_canClimb = false;
-                }
-            }
-        }
     }
 }

@@ -252,7 +252,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551979063414923925}
-  - component: {fileID: 551979063414923924}
   - component: {fileID: 551979063414923926}
   - component: {fileID: 551979063414923927}
   m_Layer: 0
@@ -278,25 +277,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &551979063414923924
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551979063414923922}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5a2d0ea4312c3b64396cfd69cf2f547c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &551979063414923926
 Rigidbody2D:
   serializedVersion: 4
@@ -336,12 +316,12 @@ HingeJoint2D:
   m_ConnectedAnchor: {x: 4.99, y: -3.71}
   m_UseMotor: 1
   m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 5
+    m_MotorSpeed: 2
+    m_MaximumMotorForce: 150
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 90
-    m_UpperAngle: -25.16
+    m_LowerAngle: 180
+    m_UpperAngle: -180
 --- !u!1 &551979063708369626
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551979063708369626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 551979064045005182}
@@ -461,11 +441,11 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 2, y: 0}
-  m_UseMotor: 0
+  m_ConnectedAnchor: {x: 2.5, y: 0}
+  m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
+    m_MaximumMotorForce: 100
   m_UseLimits: 0
   m_AngleLimits:
     m_LowerAngle: 90
@@ -485,7 +465,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 2, y: 0}
+  m_ConnectedAnchor: {x: 2.5, y: 0}
   m_DampingRatio: 0.1
   m_Frequency: 2
 --- !u!1 &551979064045005183
@@ -760,7 +740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553107801448440668}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: -2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 556752681124577616}
@@ -850,11 +830,11 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -2, y: 0}
-  m_UseMotor: 0
+  m_ConnectedAnchor: {x: -2.5, y: 0}
+  m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
+    m_MaximumMotorForce: 100
   m_UseLimits: 0
   m_AngleLimits:
     m_LowerAngle: 0
@@ -874,6 +854,6 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -2, y: 0}
+  m_ConnectedAnchor: {x: -2.5, y: 0}
   m_DampingRatio: 0.1
   m_Frequency: 2

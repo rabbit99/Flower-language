@@ -23,15 +23,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/2DGamekit/Scenes/Zone5.unity
     guid: 960b12f881940d84983273421bebc695
-  - enabled: 0
-    path: Assets/2DGamekit/Scenes/UI/UIMenus.unity
-    guid: 705f1f73151a73046842d4e4ec8f514d
-  - enabled: 0
-    path: Assets/2DGamekit/Scenes/UI/Loading.unity
-    guid: ebc4647ff02971c4ba1b207af066be4d
-  - enabled: 0
-    path: Assets/william/Scenes/Main.unity
-    guid: 1820d81501eaa604b8415372b1c54de4
   - enabled: 1
     path: Assets/william/Scenes/Start 1.unity
     guid: 223ed02799291064e89fb5e928376366
@@ -39,6 +30,21 @@ EditorBuildSettings:
     path: Assets/william/Scenes/stage_1.unity
     guid: e1cc853654e2b014ea46354ade40bcbc
   - enabled: 1
-    path: Assets/william/Scenes/stage_2.unity
+    path: Assets/william/Scenes/stage_1_2.unity
     guid: 8a9f1a3886fd39b4d8eaff85ff1f6530
+  - enabled: 1
+    path: Assets/william/Scenes/stage_2.unity
+    guid: c64dac0cae0a3e1439e269cfc871976e
+  - enabled: 1
+    path: Assets/william/Scenes/stage_3.unity
+    guid: cd87fd838f5cb1d4daf6f640e268d31d
+  - enabled: 1
+    path: Assets/william/Scenes/stage_4.unity
+    guid: f5feb1a27ec5bcc428bf0b414bdc0b94
+  - enabled: 1
+    path: Assets/2DGamekit/Scenes/UI/UIMenus.unity
+    guid: 705f1f73151a73046842d4e4ec8f514d
+  - enabled: 1
+    path: Assets/2DGamekit/Scenes/UI/Loading.unity
+    guid: ebc4647ff02971c4ba1b207af066be4d
   m_configObjects: {}

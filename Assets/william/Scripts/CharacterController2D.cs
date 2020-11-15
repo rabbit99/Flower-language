@@ -6,7 +6,7 @@ namespace Gamekit2D
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
-    public class CharacterController2D : MonoBehaviour, INotification
+    public class CharacterController2D : MonoBehaviour
     {
         [Tooltip("The Layers which represent gameobjects that the Character Controller can be grounded on.")]
         public LayerMask groundedLayerMask;
@@ -17,6 +17,7 @@ namespace Gamekit2D
         public LayerMask ladderMask;
         public float upOffset = 0;
         public float downOffset = -2.5f;
+        public float underGroundOffset = 0;
         public Tilemap ladderTileMap;
         Rigidbody2D m_Rigidbody2D;
         CapsuleCollider2D m_Capsule;
@@ -55,16 +56,6 @@ namespace Gamekit2D
             Physics2D.queriesStartInColliders = false;
         }
 
-        private void OnEnable()
-        {
-            AddNotificationObserver();
-        }
-
-        private void OnDisable()
-        {
-            RemoveNotificationObserver();
-        }
-
         void FixedUpdate()
         {
             if (canMove)
@@ -81,21 +72,23 @@ namespace Gamekit2D
             }
             bool up = Physics2D.OverlapCircle(m_Rigidbody2D.position  + new Vector2(0, upOffset), checkRadius, ladderMask);
             bool down = Physics2D.OverlapCircle(m_Rigidbody2D.position  + new Vector2(0, downOffset), checkRadius, ladderMask);
+            bool underGround = Physics2D.OverlapCircle(m_Rigidbody2D.position + new Vector2(0, underGroundOffset), checkRadius, ladderMask);
             if (!m_Capsule)
                 return;
             if (m_Capsule.IsTouchingLayers(ladderMask))
             {
-                if (PlayerInput.Instance.Vertical.Value == 1f || PlayerInput.Instance.Vertical.Value == -1f)
+                if (PlayerInput.Instance.Vertical.Value == 1f || (PlayerInput.Instance.Vertical.Value == -1f && underGround))
                 {
                     if (!climbing)
                     {
                         Vector3Int cellPosition = ladderTileMap.WorldToCell(transform.position);
                         Vector3 _v = ladderTileMap.GetCellCenterWorld(cellPosition);
                         transform.position = new Vector2(_v.x, m_Rigidbody2D.position.y);
+                        climbing = true;
+                        Debug.Log("climbing = true;");
+                        canMove = false;
+                        m_Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
                     }
-                    climbing = true;
-                    canMove = false;
-                    m_Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
                 }
                 m_NextMovement = Vector2.zero;
             }
@@ -305,49 +298,23 @@ namespace Gamekit2D
             }
         }
 
-        void AddNotificationObserver()
-        {
-            NotificationCenter.Default.AddObserver(this, NotificationKeys.InTheLadder);
-            NotificationCenter.Default.AddObserver(this, NotificationKeys.OutTheLadder);
-        }
 
-        void RemoveNotificationObserver()
+        private void OnDrawGizmos()
         {
-            NotificationCenter.Default.RemoveObserver(this, NotificationKeys.InTheLadder);
-            NotificationCenter.Default.RemoveObserver(this, NotificationKeys.OutTheLadder);
-        }
+            //Função que mostra os raios de colisão que fazem a checagem com a escada
 
-        public void OnNotify(Notification _noti)
-        {
-            if (_noti.name == NotificationKeys.InTheLadder)
+            Gizmos.color = Color.red;
+            if (!m_Rigidbody2D || m_Capsule)
             {
-                Debug.Log("(string)_noti.data" + (string)_noti.data);
-                if ((string)_noti.data == this.gameObject.name)
-                {
-                    climbing = true;
-                    //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-                }
+                m_Rigidbody2D = GetComponent<Rigidbody2D>();
+                m_Capsule = GetComponent<CapsuleCollider2D>();
             }
-            if (_noti.name == NotificationKeys.OutTheLadder)
-            {
-                Debug.Log("(string)_noti.data" + (string)_noti.data);
-                if ((string)_noti.data == this.gameObject.name)
-                {
-                    climbing = false;
-                    //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                }
-            }
+            Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, upOffset), checkRadius);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, downOffset), checkRadius);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, underGroundOffset), checkRadius);
         }
-        //private void OnDrawGizmos()
-        //{
-        //    //Função que mostra os raios de colisão que fazem a checagem com a escada
-
-        //    Gizmos.color = Color.red;
-        //    //if (!m_Rigidbody2D || m_Capsule)
-        //    //    return;
-        //    Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, upOffset), checkRadius);
-        //    Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, downOffset), checkRadius);
-        //}
     }
 
 }

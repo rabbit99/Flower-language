@@ -44,12 +44,22 @@ namespace Gamekit2D
             RightTrigger,
         }
 
+        public enum UIButton
+        {
+            None,
+            Jump,
+            Pause,
+            Skill_1,
+            Skill_2,
+            Skill_3,
+        }
 
         [Serializable]
         public class InputButton
         {
             public KeyCode key;
             public XboxControllerButtons controllerButton;
+            public UIButton uiButton;
             public bool Down { get;  set; }
             public bool Held { get; protected set; }
             public bool Up { get; protected set; }
@@ -148,9 +158,27 @@ namespace Gamekit2D
                     }
                 }else if(inputType == InputType.UI)
                 {
-                    if(key == KeyCode.Space)
+                    if (uiButton != UIButton.Jump)
+                        return;
+                    if(fixedUpdateHappened)
+                    {
+                        Down = MobileInput.JumpDown;
+                        Held = MobileInput.JumpHeld;
+                        Up = MobileInput.JumpUp;
+
+                        m_AfterFixedUpdateDown = Down;
+                        m_AfterFixedUpdateHeld = Held;
+                        m_AfterFixedUpdateUp = Up;
+                    }
+                    else
                     {
                         Down = MobileInput.JumpDown || m_AfterFixedUpdateDown;
+                        Held = MobileInput.JumpHeld || m_AfterFixedUpdateHeld;
+                        Up = MobileInput.JumpUp || m_AfterFixedUpdateUp;
+
+                        m_AfterFixedUpdateDown |= Down;
+                        m_AfterFixedUpdateHeld |= Held;
+                        m_AfterFixedUpdateUp |= Up;
                     }
                 }
             }

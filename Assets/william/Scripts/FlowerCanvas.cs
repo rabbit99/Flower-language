@@ -6,74 +6,57 @@ using UnityEngine.UIElements;
 
 public class FlowerCanvas : MonoBehaviour
 {
-    public static FlowerCanvas Instance { get; protected set; }
+    public Button JumpButton;
+    public Button CollectionGalleryButton;
+    public Button SettingButton;
+    public List<SkillBtn> SkillIcons = new List<SkillBtn>();
 
-    public GameObject QuickKeyPrefab;
-    public Transform QuickKeyTransform;
-    public string[] itemNames;
-    protected const float k_KeyIconAnchorWidth = 0.11f;
+    protected GameEventListener m_eventListener;
 
-    public Sprite[] sprites;
-
-    private List<QuickKey> QuickKeys = new List<QuickKey>();
-    private int setQuickKeyIndex = 0;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
     // Start is called before the first frame update
     void Start()
     {
-        SetInitialQuickKeyCount();
+        m_eventListener = new GameEventListener();
+        m_eventListener.ListenForEvent(EGameEvents.SetSkill, OnSetSkill);
+        Init();
     }
 
-
-    public void SetInitialQuickKeyCount()
+    public void Init()
     {
-
-        for (int i = 0; i < 3; i++)
+        if (Services.Has<DataManager>())
         {
-            GameObject quickKeyPrefab = Instantiate(QuickKeyPrefab);
-            quickKeyPrefab.transform.SetParent(QuickKeyTransform);
-            RectTransform healthIconRect = quickKeyPrefab.transform as RectTransform;
-            QuickKeys.Add(quickKeyPrefab.GetComponent<QuickKey>());
-            quickKeyPrefab.transform.localScale = Vector3.one;
-            //healthIconRect.anchoredPosition = Vector2.zero;
-            //healthIconRect.sizeDelta = Vector2.zero;
-            //healthIconRect.anchorMin -= new Vector2(k_KeyIconAnchorWidth, 0f) * i;
-            //healthIconRect.anchorMax -= new Vector2(k_KeyIconAnchorWidth, 0f) * i;
-            //m_KeyIconAnimators[i] = healthIcon.GetComponent<Animator>();
+            foreach (var go in Services.Get<DataManager>().PlayerData.flowerItems)
+            {
+                setSkill(go);
+            }
         }
 
-
     }
 
-    // Update is called once per frame
-    void Update()
+    public EventResult OnSetSkill(object eventData)
     {
-        
+        EventResult eventresult = new EventResult(false);
+        string skillName = (string)eventData;
+        setSkill(skillName);
+        return eventresult;
     }
 
-    public void ChangeKeyUI(string itemName)
+    private void setSkill(string skillName)
     {
-        //for (int i = 0; i < keyNames.Length; i++)
-        //{
-        //    m_KeyIconAnimators[i].SetBool(m_HashActivePara, controller.HasItem(keyNames[i]));
-        //}
-
-        //search sprite by item name.
-        foreach(var go in sprites)
+        switch (skillName)
         {
-            if(go.name == itemName)
-            {
-                if(setQuickKeyIndex < QuickKeys.Count)
-                {
-                    QuickKeys[setQuickKeyIndex].btnImage.sprite = go;
-                    QuickKeys[setQuickKeyIndex].keyName = itemName;
-                    setQuickKeyIndex++;
-                }
-            }
+            case "Strelitzia":
+                //天堂鳥
+                SkillIcons[0].SetSkill(true);
+                break;
+            case "Tinglihua":
+                //葶歷花
+                SkillIcons[1].SetSkill(true);
+                break;
+            case "Pansy":
+                //三色堇
+                SkillIcons[2].SetSkill(true);
+                break;
         }
     }
 }

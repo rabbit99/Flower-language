@@ -18,6 +18,10 @@ namespace Gamekit2D
             get { return m_InventoryController; }
         }
 
+        public int OriJumpConut { get => oriJumpConut; set => oriJumpConut = value; }
+        public bool CanSplash { get => canSplash; set => canSplash = value; }
+        public bool CanInevitable { get => canInevitable; set => canInevitable = value; }
+
         public SpriteRenderer spriteRenderer;
         public Damageable damageable;
         public Damager meleeDamager;
@@ -120,6 +124,11 @@ namespace Gamekit2D
         private bool onCactusBuff = false;
         private float fallingDistance = 0;
         private float lastStandPosY = 0;
+        private int oriJumpConut = 0;
+        private bool canSplash = false;
+        private bool canInevitable = false;
+
+        private bool amInvincible = false;
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
         {
@@ -202,12 +211,6 @@ namespace Gamekit2D
                 {
                     Unpause();
                 }
-            }
-
-            //test
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                UseItem("cactus");
             }
         }
 
@@ -455,8 +458,8 @@ namespace Gamekit2D
 
         public void CheckForCrouching()
         {
-            if(!CheckForClimbed() && CheckForGrounded())
-            m_Animator.SetBool(m_HashCrouchingPara, PlayerInput.Instance.Vertical.Value < 0f);
+            //if(!CheckForClimbed() && CheckForGrounded())
+            //m_Animator.SetBool(m_HashCrouchingPara, PlayerInput.Instance.Vertical.Value < 0f);
         }
 
         public bool CheckForGrounded()
@@ -472,8 +475,8 @@ namespace Gamekit2D
                 {//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
                     landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
                     fallingDistance = lastStandPosY - transform.position.y;
-                    Debug.Log("fallingDistance = " + fallingDistance);
-                    if (Mathf.Abs(fallingDistance) > 3)
+                    //Debug.Log("fallingDistance = " + fallingDistance + " lastStandPosY = "+ lastStandPosY + " transform.position.y = "+ transform.position.y);
+                    if (lastStandPosY > transform.position.y && Mathf.Abs(fallingDistance) > 3)
                     {
                         Debug.Log("falling hurt");
                         damageable.TakeDamage(meleeDamager);
@@ -486,8 +489,8 @@ namespace Gamekit2D
             {
                 if (wasGrounded)
                 {
-                    lastStandPosY = transform.position.y;
-                    Debug.Log("lastStandPosY  = " + lastStandPosY);
+                    SetLastStandPosY();
+                    //Debug.Log("lastStandPosY  = " + lastStandPosY);
                 }
                 m_CurrentSurface = null;
                 
@@ -499,11 +502,16 @@ namespace Gamekit2D
             return grounded;
         }
 
+        public void SetLastStandPosY()
+        {
+            lastStandPosY = transform.position.y;
+        }
+
         public bool CheckForClimbed()
         {
             bool wasClimbed = m_Animator.GetBool(m_HashClimbingPara);
             bool climbed = m_CharacterController2D.climbing;
-
+            //Debug.Log("CheckForClimbed");
             if (climbed)
             {
                 //FindCurrentSurface();
@@ -523,8 +531,22 @@ namespace Gamekit2D
                 m_MoveVector = Vector2.zero;
 
             m_Animator.SetBool(m_HashClimbingPara, climbed);
-
             return climbed;
+        }
+
+        public bool CheckForClimbIdle()
+        {
+            bool climbIdle = false;
+            if (PlayerInput.Instance.Vertical.Value == 0)
+            {
+                m_Animator.speed = 0;
+                climbIdle = true;
+            }
+            else
+            {
+                m_Animator.speed = 1;
+            }
+            return climbIdle;
         }
 
         public void FindCurrentSurface()
@@ -639,11 +661,6 @@ namespace Gamekit2D
         public bool CheckForJumpInput()
         {
             return PlayerInput.Instance.Jump.Down;
-        }
-
-        public bool CheckForClimbInput()
-        {
-            return PlayerInput.Instance.m_canClimb;
         }
 
         public bool CheckForFallInput()
@@ -765,7 +782,9 @@ namespace Gamekit2D
             //if the player don't have control, we shouldn't be able to be hurt as this wouldn't be fair
             if (!PlayerInput.Instance.HaveControl)
                 return;
-
+            //if the player using skill to be Invincible.
+            if (amInvincible)
+                return;
             //if(damager.name == "FireWall" && m_InventoryController.HasItem("cactus"))
             //{
             //    Debug.Log("Hurt by FireWall");
@@ -911,7 +930,6 @@ namespace Gamekit2D
         public void AddItem(string itemName)
         {
             Debug.Log("got the item named " + itemName);
-            FlowerCanvas.Instance.ChangeKeyUI(itemName);
         }
 
         public void UseItem(string itemName)
@@ -949,6 +967,38 @@ namespace Gamekit2D
                 }
                 Debug.Log("end buff named " + itemName);
             }
+        }
+
+        public void UseSkill(string skillName)
+        {
+            switch (skillName)
+            {
+                case "Strelitzia":
+                    //天堂鳥
+                    //Nothing to do
+                    break;
+                case "Tinglihua":
+                    //葶歷花
+                    //do splash
+                    break;
+                case "Pansy":
+                    //三色堇
+                    //Inevitable
+                    if (canInevitable && !amInvincible)
+                    {
+                        StartCoroutine(IAmInvincible());
+                    }
+                    break;
+            }
+        }
+
+        IEnumerator IAmInvincible()
+        {
+            amInvincible = true;
+            //VFX ON
+            yield return new WaitForSeconds(3);
+            //VFX OFF
+            amInvincible = false;
         }
     }
 }

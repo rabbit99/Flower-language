@@ -1,0 +1,553 @@
+fileFormatVersion: 2
+guid: 9387cd46c0d26ba4589cd6198d1dd0a3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5427542759004068747
+    second: UI_Collection Gallery_BG
+  - first:
+      213: 381211087541856348
+    second: "UI_\u5206\u584A_1"
+  - first:
+      213: -541225328375426945
+    second: "UI_\u5206\u584A_2"
+  - first:
+      213: 1744112840079255036
+    second: "UI_\u5206\u584A_3"
+  - first:
+      213: 8527734699371783171
+    second: UI_CollectionGallery_Icon
+  - first:
+      213: -7732536434702809589
+    second: UI_Setting
+  - first:
+      213: 3546819176708637302
+    second: "UI_\u5206\u584A_6"
+  - first:
+      213: -7719384328632289025
+    second: "UI_\u5206\u584A_7"
+  - first:
+      213: -2278557328622091349
+    second: UI_Skill_2
+  - first:
+      213: -7467424011523946921
+    second: UI_Skill_3
+  - first:
+      213: 8160485514856849367
+    second: UI_BackBtn
+  - first:
+      213: -1728265911374958784
+    second: UI_CloseBtn
+  - first:
+      213: -3892345078164312245
+    second: "UI_\u5206\u584A_12"
+  - first:
+      213: -5198023970716017888
+    second: UI_Title_Bg
+  - first:
+      213: -7250404743647971490
+    second: UI_JoyStick_BG
+  - first:
+      213: -7707944698695272683
+    second: UI_Skill_1
+  - first:
+      213: 2072001977181729177
+    second: UI_Jump
+  - first:
+      213: -3960540189005602467
+    second: UI_JoyStick_Handle
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI_Collection Gallery_BG
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 972
+        width: 1503
+        height: 1505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 550, y: 550, z: 550, w: 550}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8b5ea90261825b40800000000000000
+      internalID: 5427542759004068747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "UI_\u5206\u584A_1"
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 2175
+        width: 466
+        height: 277
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c586f51e6755a4500800000000000000
+      internalID: 381211087541856348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "UI_\u5206\u584A_2"
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 2148
+        width: 296
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f701dbe6e6e2d78f0800000000000000
+      internalID: -541225328375426945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "UI_\u5206\u584A_3"
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 1567
+        width: 783
+        height: 411
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 145, y: 90, z: 145, w: 90}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf52f192365543810800000000000000
+      internalID: 1744112840079255036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_CollectionGallery_Icon
+      rect:
+        serializedVersion: 2
+        x: 1696
+        y: 1127
+        width: 336
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304e3d6f689985670800000000000000
+      internalID: 8527734699371783171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Setting
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 1127
+        width: 233
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0606c4d41380b490800000000000000
+      internalID: -7732536434702809589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "UI_\u5206\u584A_6"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 860
+        width: 319
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6720346df35d83130800000000000000
+      internalID: 3546819176708637302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "UI_\u5206\u584A_7"
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 859
+        width: 317
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff8b7272adc3fd490800000000000000
+      internalID: -7719384328632289025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Skill_2
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 626
+        width: 242
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba30e139e20f060e0800000000000000
+      internalID: -2278557328622091349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Skill_3
+      rect:
+        serializedVersion: 2
+        x: 2043
+        y: 703
+        width: 242
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75684e5fc616e5890800000000000000
+      internalID: -7467424011523946921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BackBtn
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 713
+        width: 181
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7df53c3f65edf3170800000000000000
+      internalID: 8160485514856849367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_CloseBtn
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 715
+        width: 111
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f24137f47f308e0800000000000000
+      internalID: -1728265911374958784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "UI_\u5206\u584A_12"
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 541
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4fa6c026cc9bf9c0800000000000000
+      internalID: -3892345078164312245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Title_Bg
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 456
+        width: 710
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b918b2db8ecd7b0800000000000000
+      internalID: -5198023970716017888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_JoyStick_BG
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 47
+        width: 603
+        height: 604
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e573e09cc43616b90800000000000000
+      internalID: -7250404743647971490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Skill_1
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 355
+        width: 241
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517b9ed8221e70590800000000000000
+      internalID: -7707944698695272683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Jump
+      rect:
+        serializedVersion: 2
+        x: 1823
+        y: 47
+        width: 603
+        height: 604
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -301.5, y: -302}
+        - {x: -301.5, y: 201}
+        - {x: -126.5, y: 302}
+        - {x: 301.5, y: 302}
+        - {x: 301.5, y: -302}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 991f2dff1da31cc10800000000000000
+      internalID: 2072001977181729177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_JoyStick_Handle
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 129
+        width: 235
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d51a9a39ea55909c0800000000000000
+      internalID: -3960540189005602467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

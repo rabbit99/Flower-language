@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MobileJumpButton : MonoBehaviour,IPointerDownHandler,IPointerUpHandler
 {
+    private bool isSetting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +28,27 @@ public class MobileJumpButton : MonoBehaviour,IPointerDownHandler,IPointerUpHand
     public void OnPointerDown(PointerEventData eventData)
     {
         MobileInput.JumpDown = true;
+        StartCoroutine(RelaseJumpDown());
+        MobileInput.JumpHeld = true;
+        MobileInput.JumpUp = false;
+    }
+
+    IEnumerator RelaseJumpDown()
+    {
+        yield return new WaitForEndOfFrame();
+        MobileInput.JumpDown = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        MobileInput.JumpDown = false;
+        MobileInput.JumpHeld = false;
+        MobileInput.JumpUp = true;
+    }
+
+    IEnumerator set()
+    {
+        yield return new WaitForEndOfFrame();
         MobileInput.JumpDown = false;
     }
 }
