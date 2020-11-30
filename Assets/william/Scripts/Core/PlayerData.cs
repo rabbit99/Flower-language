@@ -22,4 +22,6 @@ public class PlayerData
     public int oriJumpConut = 0;
     public bool canSplash = false;
     public bool canInevitable = false;
+
+    public bool isFinishedNormalEnd = false;
 }

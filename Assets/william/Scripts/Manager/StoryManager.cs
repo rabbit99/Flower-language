@@ -94,6 +94,11 @@ public class StoryManager : MonoBehaviour
         storyController = Services.Get<ResourcesManager>().Spawn(referencePath).GetComponent<StoryController>();
     }
 
+    public void SaveFinishedNormalEnd()
+    {
+       Services.Get<DataManager>().SaveFinishedNormalEnd();
+    }
+
     public void GoStartMenu()
     {
         TransitionPoint tp = new TransitionPoint();

@@ -118,7 +118,14 @@ public class DataManager
     {
         List<string> NormalEndFlowerItems = new List<string> { "Strelitzia", "Tinglihua", "Pansy" };
         bool equal = NormalEndFlowerItems.SequenceEqual(playerData.flowerItems);
+ 
         return equal;
+    }
+
+    public void SaveFinishedNormalEnd()
+    {
+        playerData.isFinishedNormalEnd = true;
+        Save();
     }
 
     private void save()
