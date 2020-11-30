@@ -331,6 +331,9 @@ MonoBehaviour:
   underGroundOffset: 0
   ladderTileMap: {fileID: 0}
   climbing: 1
+  canDash: 0
+  dashSpeed: 0
+  direction: 0
   speed: 0.05
 --- !u!114 &5863633230239643550
 MonoBehaviour:
@@ -344,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cd916f36b796c44802ebb25ed745ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 2
+  inputType: 0
   Pause:
     key: 27
     controllerButton: 8
@@ -731,7 +734,7 @@ BoxCollider2D:
   m_Offset: {x: 0.0012285709, y: 0.99942183}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: -0.05}
+    pivot: {x: 0.5, y: 0.022}
     oldSize: {x: 1, y: 1.7}
     newSize: {x: 3.7534883, y: 2.8325582}
     adaptiveTilingThreshold: 0.5

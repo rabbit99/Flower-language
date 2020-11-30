@@ -40,6 +40,11 @@ namespace Gamekit2D
         private Vector2 moveMent = new Vector3();
         public bool climbing = false;
         private bool canMove = true;
+
+        public bool canDash = false;
+        public float dashSpeed = 2000;
+        public int direction;
+
         public float speed = 2f;
         void Awake()
         {
@@ -60,15 +65,33 @@ namespace Gamekit2D
         {
             if (canMove)
             {
-                //m_Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-                m_PreviousPosition = m_Rigidbody2D.position;
-                m_CurrentPosition = m_PreviousPosition + m_NextMovement;
-                Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
+                if (canDash)
+                {
+                    if (direction == 1)
+                    {
+                        m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
+                        //m_Rigidbody2D.AddForce(Vector2.left * dashSpeed,ForceMode2D.Impulse);
+                    }
+                    else if (direction == 2)
+                    {
+                        m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
+                        //m_Rigidbody2D.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                    }
+                    m_PreviousPosition = m_Rigidbody2D.position;
+                }
+                else
+                {
+                    //m_Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+                    m_PreviousPosition = m_Rigidbody2D.position;
+                    m_CurrentPosition = m_PreviousPosition + m_NextMovement;
+                    Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
 
-                m_Rigidbody2D.MovePosition(m_CurrentPosition);
-                m_NextMovement = Vector2.zero;
-                CheckCapsuleEndCollisions();
-                CheckCapsuleEndCollisions(false);
+                    m_Rigidbody2D.MovePosition(m_CurrentPosition);
+                    m_NextMovement = Vector2.zero;
+                    CheckCapsuleEndCollisions();
+                    CheckCapsuleEndCollisions(false);
+                }
+
             }
             bool up = Physics2D.OverlapCircle(m_Rigidbody2D.position  + new Vector2(0, upOffset), checkRadius, ladderMask);
             bool down = Physics2D.OverlapCircle(m_Rigidbody2D.position  + new Vector2(0, downOffset), checkRadius, ladderMask);

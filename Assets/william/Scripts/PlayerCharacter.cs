@@ -880,6 +880,7 @@ namespace Gamekit2D
 
         public void TeleportToColliderBottom()
         {
+            Debug.Log("TeleportToColliderBottom");
             Vector2 colliderBottom = m_CharacterController2D.Rigidbody2D.position + m_Capsule.offset + Vector2.down * m_Capsule.size.y * 0.5f;
             m_CharacterController2D.Teleport(colliderBottom);
         }
@@ -981,12 +982,16 @@ namespace Gamekit2D
                     break;
                 case "Tinglihua":
                     //葶歷花
-                    //do splash
+                    //do splash 
+                    if (!m_CharacterController2D.canDash)
+                    {
+                        StartCoroutine(Dashing());
+                    }
                     break;
                 case "Pansy":
                     //三色堇
                     //Inevitable
-                    if (canInevitable && !amInvincible)
+                    if (!amInvincible)
                     {
                         StartCoroutine(IAmInvincible());
                     }
@@ -994,10 +999,22 @@ namespace Gamekit2D
             }
         }
 
+        IEnumerator Dashing()
+        {
+            m_CharacterController2D.canDash = true;
+            m_CharacterController2D.direction = spriteRenderer.flipX ? 1 : 2;
+            //m_CharacterController2D.Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+            yield return new WaitForSeconds(0.15f);
+            m_CharacterController2D.canDash = false;
+            //m_CharacterController2D.Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            m_CharacterController2D.Rigidbody2D.velocity = Vector2.zero;
+        }
+
         IEnumerator IAmInvincible()
         {
             amInvincible = true;
             //VFX ON
+            damageable.EnableInvulnerability();
             yield return new WaitForSeconds(3);
             //VFX OFF
             amInvincible = false;
