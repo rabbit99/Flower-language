@@ -434,6 +434,7 @@ MonoBehaviour:
   verticalCameraOffsetDelay: 1
   spriteOriginallyFacesLeft: 0
   variableJoystick: {fileID: 0}
+  fallCheckVar: 5
 --- !u!114 &5863567676333983554
 MonoBehaviour:
   m_ObjectHideFlags: 0

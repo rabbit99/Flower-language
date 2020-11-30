@@ -160,7 +160,7 @@ PrefabInstance:
     - target: {fileID: 820812417619871554, guid: e956da64b4071334aaa2fb9750b33c62,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -16.099976
+      value: -16.100098
       objectReference: {fileID: 0}
     - target: {fileID: 820812417619871554, guid: e956da64b4071334aaa2fb9750b33c62,
         type: 3}
@@ -365,6 +365,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: NameText
       objectReference: {fileID: 0}
+    - target: {fileID: 7275178296643397842, guid: e956da64b4071334aaa2fb9750b33c62,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.099853516
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275178296643397842, guid: e956da64b4071334aaa2fb9750b33c62,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 306.60312
+      objectReference: {fileID: 0}
     - target: {fileID: 7542290350929908447, guid: e956da64b4071334aaa2fb9750b33c62,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -391,6 +401,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: d3d94180e5c4ab64eb720215e86bcb0c,
         type: 3}
+    - target: {fileID: 7634718297598910972, guid: e956da64b4071334aaa2fb9750b33c62,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634718297598910972, guid: e956da64b4071334aaa2fb9750b33c62,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8309846140981749858, guid: e956da64b4071334aaa2fb9750b33c62,
         type: 3}
       propertyPath: m_AnchorMax.x

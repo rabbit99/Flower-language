@@ -59,4 +59,9 @@ public class FlowerCanvas : MonoBehaviour
                 break;
         }
     }
+
+    public void OnDestroy()
+    {
+        m_eventListener.StopListeningForEvent((int)EGameEvents.SetSkill);
+    }
 }

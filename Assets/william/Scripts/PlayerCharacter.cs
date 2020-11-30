@@ -70,6 +70,8 @@ namespace Gamekit2D
 
         public VariableJoystick variableJoystick;
 
+        public float fallCheckVar = 5;
+
         protected CharacterController2D m_CharacterController2D;
         protected Animator m_Animator;
         protected CapsuleCollider2D m_Capsule;
@@ -476,7 +478,7 @@ namespace Gamekit2D
                     landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
                     fallingDistance = lastStandPosY - transform.position.y;
                     //Debug.Log("fallingDistance = " + fallingDistance + " lastStandPosY = "+ lastStandPosY + " transform.position.y = "+ transform.position.y);
-                    if (lastStandPosY > transform.position.y && Mathf.Abs(fallingDistance) > 3)
+                    if (lastStandPosY > transform.position.y && Mathf.Abs(fallingDistance) > fallCheckVar)
                     {
                         Debug.Log("falling hurt");
                         damageable.TakeDamage(meleeDamager);
