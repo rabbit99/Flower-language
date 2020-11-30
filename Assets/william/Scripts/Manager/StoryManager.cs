@@ -94,6 +94,14 @@ public class StoryManager : MonoBehaviour
         storyController = Services.Get<ResourcesManager>().Spawn(referencePath).GetComponent<StoryController>();
     }
 
+    public void GoStartMenu()
+    {
+        TransitionPoint tp = new TransitionPoint();
+        tp.transitionType = TransitionPoint.TransitionType.DifferentZone;
+        tp.newSceneName = "Start 1";
+        SceneController.TransitionToScene(tp);
+    }
+
     #region Process Check
     public void ClueProcess(object eventData)
     {

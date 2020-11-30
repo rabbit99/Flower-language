@@ -424,7 +424,7 @@ MonoBehaviour:
     arg3: none
     arg4: none
     arg5: imi
-    arg6: "\u7D42\u65BC\u6253\u958B\u4E86!"
+    arg6: "\u7D42\u65BC\u6253\u958B\u9019\u6247\u9580\u4E86\uFF01"
     arg7: none
     remarks: "\u25B2\u7576\u5929\u5802\u9CE5\u7684\u9580\u88AB\u958B\u555F\u6642"
   - index: 9
@@ -1446,4 +1446,24 @@ MonoBehaviour:
     arg5: flowerFairy
     arg6: "\u2026\u518D\u898B\u4E86\u5C0F\u4E2B\u982D"
     arg7: black
+    remarks: 
+  - index: 901
+    action: say
+    arg1: narrator
+    arg2: none
+    arg3: none
+    arg4: none
+    arg5: narrator
+    arg6: "\u7D93\u6B77\u4E86\u6F2B\u9577\u7684\u65C5\u7A0B\uFF0C\n\u4F9D\u7C73\u7D42\u65BC\u5230\u9054\u4E86\u65C5\u9014\u7684\u7D42\u9EDE\u3002"
+    arg7: none
+    remarks: 
+  - index: 901
+    action: say
+    arg1: narrator
+    arg2: none
+    arg3: none
+    arg4: none
+    arg5: narrator
+    arg6: "\u5728\u5979\u773C\u524D\u7684\u662F\u4E00\u5927\u7247\u7684\u5EB7\u4E43\u99A8\uFF0C\n\u4E0D\u904E\u4F9D\u7C73\u5C0D\u8EAB\u65C1\u7684\u5EB7\u4E43\u99A8\u6BEB\u4E0D\u5728\u610F\uFF0C\n\u53EA\u662F\u5446\u6123\u7684\u8D70\u5411\u7AD9\u5728\u773C\u524D\u7684\u8EAB\u5F71\u3002"
+    arg7: none
     remarks: 
