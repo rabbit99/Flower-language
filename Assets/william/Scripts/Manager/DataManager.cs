@@ -117,7 +117,11 @@ public class DataManager
     public bool CheckNormalEnd()
     {
         List<string> NormalEndFlowerItems = new List<string> { "Strelitzia", "Tinglihua", "Pansy" };
-        bool equal = NormalEndFlowerItems.SequenceEqual(playerData.flowerItems);
+        bool equal = false;
+        for(int i = 0;i < NormalEndFlowerItems.Count; i++)
+        {
+            equal = playerData.flowerItems.Contains(NormalEndFlowerItems[i]);
+        }
  
         return equal;
     }
