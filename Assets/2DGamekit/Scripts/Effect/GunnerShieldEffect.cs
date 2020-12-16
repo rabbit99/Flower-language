@@ -8,7 +8,7 @@ namespace Gamekit2D
     {
         protected Material m_Material;
         protected float m_Intensity = 0.0f;
-
+        public AudioSource audioSource;
         const int count = 2;
 
         private void Start()
@@ -16,6 +16,11 @@ namespace Gamekit2D
             SpriteRenderer renderer = GetComponent<SpriteRenderer>();
             m_Material = renderer.material;
             m_Intensity = 0.0f;
+        }
+
+        private void OnEnable()
+        {
+            audioSource.Play();
         }
 
         public void ShieldHit(Damager damager, Damageable damageable)

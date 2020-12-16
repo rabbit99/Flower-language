@@ -54,6 +54,8 @@ namespace Gamekit2D
         public RandomAudioPlayer meleeAttackAudioPlayer;
         public RandomAudioPlayer rangedAttackAudioPlayer;
 
+        public GameObject ShieldObject;
+
         public float shotsPerSecond = 1f;
         public float bulletSpeed = 5f;
         public float holdingGunTimeoutDuration = 10f;
@@ -1052,9 +1054,11 @@ namespace Gamekit2D
             damageable.EnableInvulnerability();
             //VFX ON
             StartFlickering();
+            ShieldObject.SetActive(true);
             yield return new WaitForSeconds(3);
             //VFX OFF
             StopFlickering();
+            ShieldObject.SetActive(false);
             amInvincible = false;
         }
     }
