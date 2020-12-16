@@ -29,14 +29,14 @@ namespace Gamekit2D
             {
                 //Debug.Log("jump again , conut = "+ jumpConut);
                 jumpConut--;
-                m_MonoBehaviour.SetLastStandPosY();
+                m_MonoBehaviour.SetLastStandPosY(true);
                 m_MonoBehaviour.SetVerticalMovement(m_MonoBehaviour.jumpSpeed);
             }
 
             m_MonoBehaviour.CheckForCrouching ();
             m_MonoBehaviour.CheckForClimbed();
 
-
+            m_MonoBehaviour.CheckForDash();
         }
     }
 }

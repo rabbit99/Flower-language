@@ -107,6 +107,7 @@ namespace Gamekit2D
         protected readonly int m_HashGroundedPara = Animator.StringToHash("Grounded");
         protected readonly int m_HashClimbingPara = Animator.StringToHash("Climbing");
         protected readonly int m_HashCrouchingPara = Animator.StringToHash("Crouching");
+        protected readonly int m_HashDashPara = Animator.StringToHash("Dash");
         protected readonly int m_HashPushingPara = Animator.StringToHash("Pushing");
         protected readonly int m_HashTimeoutPara = Animator.StringToHash("Timeout");
         protected readonly int m_HashRespawnPara = Animator.StringToHash("Respawn");
@@ -131,6 +132,8 @@ namespace Gamekit2D
         private bool canInevitable = false;
 
         private bool amInvincible = false;
+
+        private bool isDead = false;
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
         {
@@ -504,9 +507,19 @@ namespace Gamekit2D
             return grounded;
         }
 
-        public void SetLastStandPosY()
+        public void SetLastStandPosY(bool isAir = false)
         {
-            lastStandPosY = transform.position.y;
+            if (isAir)
+            {
+                if(lastStandPosY > transform.position.y)
+                {
+                    lastStandPosY = transform.position.y;
+                }
+            }
+            else
+            {
+                lastStandPosY = transform.position.y;
+            }
         }
 
         public bool CheckForClimbed()
@@ -517,7 +530,7 @@ namespace Gamekit2D
             if (climbed)
             {
                 //FindCurrentSurface();
-                lastStandPosY = transform.position.y;
+                SetLastStandPosY();
                 //if (!wasClimbed && m_MoveVector.y < -1.0f)
                 //{//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
                 //    landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
@@ -834,6 +847,7 @@ namespace Gamekit2D
 
         IEnumerator DieRespawnCoroutine(bool resetHealth, bool useCheckPoint)
         {
+            isDead = true;
             PlayerInput.Instance.ReleaseControl(true);
             yield return new WaitForSeconds(1.0f); //wait one second before respawing
             yield return StartCoroutine(ScreenFader.FadeSceneOut(useCheckPoint ? ScreenFader.FadeType.Black : ScreenFader.FadeType.GameOver));
@@ -842,6 +856,7 @@ namespace Gamekit2D
             Respawn(resetHealth, useCheckPoint);
             yield return new WaitForEndOfFrame();
             yield return StartCoroutine(ScreenFader.FadeSceneIn());
+            isDead = false;
             PlayerInput.Instance.GainControl();
         }
 
@@ -974,6 +989,8 @@ namespace Gamekit2D
 
         public void UseSkill(string skillName)
         {
+            if (isDead)
+                return;
             switch (skillName)
             {
                 case "Strelitzia":
@@ -999,24 +1016,45 @@ namespace Gamekit2D
             }
         }
 
+        public void CheckForDash()
+        {
+            if (m_CharacterController2D.canDash)
+            {
+                m_Animator.SetBool(m_HashDashPara, true);
+            }
+            else
+            {
+                m_Animator.SetBool(m_HashDashPara, false);
+            }
+        }
+
         IEnumerator Dashing()
         {
-            m_CharacterController2D.canDash = true;
             m_CharacterController2D.direction = spriteRenderer.flipX ? 1 : 2;
-            //m_CharacterController2D.Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-            yield return new WaitForSeconds(0.15f);
+            m_CharacterController2D.canDash = true;
+            m_CharacterController2D.Rigidbody2D.bodyType = RigidbodyType2D.Static;
+            m_CharacterController2D.tr.enabled = true;
+            SetLastStandPosY(true);
+            yield return new WaitForSeconds(0.2f);
+            SetLastStandPosY(true);
             m_CharacterController2D.canDash = false;
-            //m_CharacterController2D.Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            m_CharacterController2D.Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            m_CharacterController2D.tr.enabled = false;
             m_CharacterController2D.Rigidbody2D.velocity = Vector2.zero;
+            m_Animator.SetFloat(m_HashHorizontalSpeedPara, 0);
+            m_Animator.SetFloat(m_HashVerticalSpeedPara, 0);
+            m_MoveVector = Vector2.zero;
         }
 
         IEnumerator IAmInvincible()
         {
             amInvincible = true;
-            //VFX ON
             damageable.EnableInvulnerability();
+            //VFX ON
+            StartFlickering();
             yield return new WaitForSeconds(3);
             //VFX OFF
+            StopFlickering();
             amInvincible = false;
         }
     }

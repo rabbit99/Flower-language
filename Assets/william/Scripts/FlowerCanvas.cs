@@ -16,13 +16,17 @@ public class FlowerCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Init();
         m_eventListener = new GameEventListener();
         m_eventListener.ListenForEvent(EGameEvents.SetSkill, OnSetSkill);
-        Init();
     }
 
     public void Init()
     {
+        for(int i = 0; i < SkillIcons.Count; i++)
+        {
+            SkillIcons[i].SetSkill(false);
+        }
         if (Services.Has<DataManager>())
         {
             foreach (var go in Services.Get<DataManager>().PlayerData.flowerItems)
@@ -43,20 +47,12 @@ public class FlowerCanvas : MonoBehaviour
 
     private void setSkill(string skillName)
     {
-        switch (skillName)
+        for (int i = 0; i < SkillIcons.Count; i++)
         {
-            case "Strelitzia":
-                //天堂鳥
-                SkillIcons[0].SetSkill(true);
-                break;
-            case "Tinglihua":
-                //葶歷花
-                SkillIcons[1].SetSkill(true);
-                break;
-            case "Pansy":
-                //三色堇
-                SkillIcons[2].SetSkill(true);
-                break;
+            if (SkillIcons[i].SkillName == skillName)
+            {
+                SkillIcons[i].SetSkill(true);
+            }
         }
     }
 

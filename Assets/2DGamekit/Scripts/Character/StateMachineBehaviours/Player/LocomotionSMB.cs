@@ -24,6 +24,7 @@ namespace Gamekit2D
             else if(m_MonoBehaviour.CheckForMeleeAttackInput ())
                 m_MonoBehaviour.MeleeAttack();
             m_MonoBehaviour.CheckForClimbed();
+            m_MonoBehaviour.CheckForDash();
         }
     }
 }

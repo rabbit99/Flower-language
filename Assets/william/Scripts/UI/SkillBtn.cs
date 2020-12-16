@@ -28,16 +28,8 @@ public class SkillBtn : MonoBehaviour
 
     public void SetSkill(bool active)
     {
-        if (active)
-        {
-            iconObj.SetActive(true);
-            iconBtn.interactable = true;
-        }
-        else
-        {
-            iconObj.SetActive(false);
-            iconBtn.interactable = false;
-        }
+        iconObj.SetActive(active);
+        iconBtn.interactable = active;
     }
 
     public void UseSkill()

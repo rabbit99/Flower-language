@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,10 +15,13 @@ namespace Gamekit2D
         public float groundedRaycastDistance = 0.1f;
 
         public float checkRadius = 0.3f;
+        public float checkDashRadius = 0.3f;
         public LayerMask ladderMask;
+        public LayerMask playerLayerMask;
         public float upOffset = 0;
         public float downOffset = -2.5f;
         public float underGroundOffset = 0;
+        public float horizontalOffset = 0;
         public Tilemap ladderTileMap;
         Rigidbody2D m_Rigidbody2D;
         CapsuleCollider2D m_Capsule;
@@ -42,10 +46,11 @@ namespace Gamekit2D
         private bool canMove = true;
 
         public bool canDash = false;
-        public float dashSpeed = 2000;
+        public Vector3 dashSpeed = new Vector3();
         public int direction;
-
+        public Vector2 boxSize;
         public float speed = 2f;
+        public TrailRenderer tr;
         void Awake()
         {
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -67,21 +72,28 @@ namespace Gamekit2D
             {
                 if (canDash)
                 {
+                    if (CheckNextMove())
+                    {
+                        Debug.Log("有牆");
+                        m_PreviousPosition = m_Rigidbody2D.position;
+                        m_NextMovement = Vector2.zero;
+                        return;
+                    }
+                        
                     if (direction == 1)
                     {
-                        m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
-                        //m_Rigidbody2D.AddForce(Vector2.left * dashSpeed,ForceMode2D.Impulse);
+                        gameObject.transform.Translate(dashSpeed * -1);
                     }
                     else if (direction == 2)
                     {
-                        m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
-                        //m_Rigidbody2D.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                        gameObject.transform.Translate(dashSpeed);
                     }
+                    
                     m_PreviousPosition = m_Rigidbody2D.position;
+                    m_NextMovement = Vector2.zero;
                 }
                 else
                 {
-                    //m_Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
                     m_PreviousPosition = m_Rigidbody2D.position;
                     m_CurrentPosition = m_PreviousPosition + m_NextMovement;
                     Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
@@ -148,6 +160,47 @@ namespace Gamekit2D
                     FinishClimb();
                 }
             }
+        }
+
+        public bool CheckNextMove() {
+            //RaycastHit2D lRHit2D = Physics2D.BoxCast(m_Rigidbody2D.position, boxSize, 0, Vector2.left * dashSpeed.x, 5.0f, playerLayerMask);
+            bool result = false;
+            if (direction == 1)
+            {
+                result = Physics2D.OverlapCircle(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(horizontalOffset*-1 + dashSpeed.x * -1, 0), checkDashRadius, playerLayerMask);
+            }
+            else if (direction == 2)
+            {
+                result = Physics2D.OverlapCircle(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(horizontalOffset + dashSpeed.x, 0), checkDashRadius, playerLayerMask);
+            }
+            return result;
+            //if (result)
+            //{
+            //    Debug.Log("有牆");
+            //    transform.position = new Vector3(transform.position.x, transform.position.y, 0);//修改玩家的位置
+
+            //    float tempXVaule = (float)Math.Round(lRHit2D.point.x, 1);
+            //    Vector3 colliderPoint = new Vector3(tempXVaule, transform.position.y);
+            //    float tempDistance = Vector3.Distance(colliderPoint, transform.position);
+            //    if (tempDistance > (boxSize.x * 0.5f + 0.1f))
+            //    {
+            //        Debug.Log("");
+            //    }
+            //    else
+            //    {
+            //        Debug.Log("");
+            //        float tempX = 0;
+            //        if (direction == 1)
+            //        {
+            //            tempX = tempXVaule - boxSize.x * 0.5f - 0.1f + 0.05f; //多加上0.05f的修正距离，防止出现由于精度问题产生的鬼畜行为
+            //        }
+            //        else if (direction == 2)
+            //        {
+            //            tempX = tempXVaule + boxSize.x * 0.5f + 0.1f - 0.05f;
+            //        }
+            //        transform.position = new Vector3(transform.position.x, transform.position.y, 0);//修改玩家的位置
+            //    }
+            //}
         }
 
         void FinishClimb()
@@ -337,6 +390,10 @@ namespace Gamekit2D
             Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, downOffset), checkRadius);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(0, underGroundOffset), checkRadius);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(horizontalOffset + dashSpeed.x, 0), checkDashRadius);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(m_Rigidbody2D.position + m_Capsule.offset + new Vector2(horizontalOffset*-1 + dashSpeed.x*-1, 0), checkDashRadius);
         }
     }
 
