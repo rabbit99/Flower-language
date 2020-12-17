@@ -10,6 +10,8 @@ public class FlowerCanvas : MonoBehaviour
     public Button CollectionGalleryButton;
     public Button SettingButton;
     public List<SkillBtn> SkillIcons = new List<SkillBtn>();
+    public List<GameObject> Diarys = new List<GameObject>();
+    public GameObject DiarysCloseButton;
 
     protected GameEventListener m_eventListener;
 
@@ -19,6 +21,7 @@ public class FlowerCanvas : MonoBehaviour
         Init();
         m_eventListener = new GameEventListener();
         m_eventListener.ListenForEvent(EGameEvents.SetSkill, OnSetSkill);
+        m_eventListener.ListenForEvent(EGameEvents.ShowDiary, OnShowDiary);
     }
 
     public void Init()
@@ -59,5 +62,26 @@ public class FlowerCanvas : MonoBehaviour
     public void OnDestroy()
     {
         m_eventListener.StopListeningForEvent((int)EGameEvents.SetSkill);
+        m_eventListener.StopListeningForEvent((int)EGameEvents.ShowDiary);
+    }
+
+    public EventResult OnShowDiary(object eventData)
+    {
+        EventResult eventresult = new EventResult(false);
+        int index = (int)eventData;
+        DiarysCloseButton.SetActive(true);
+        Diarys[index].SetActive(true);
+        PlayerInput.Instance.ReleaseControl(true);
+        return eventresult;
+    }
+
+    public void CloseDiary()
+    {
+        DiarysCloseButton.SetActive(false);
+        foreach(var go in Diarys)
+        {
+            go.SetActive(false);
+        }
+        PlayerInput.Instance.GainControl();
     }
 }

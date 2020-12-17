@@ -114,6 +114,27 @@ public class DataManager
             return false;
     }
 
+    public void SaveDiary(int index)
+    {
+        if (!playerData.activeDiarys.Contains(index))
+        {
+            playerData.activeDiarys.Add(index);
+            Save();
+        }
+    }
+
+    public bool CheckDiary(int index)
+    {
+        if (!playerData.activeDiarys.Contains(index))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool CheckNormalEnd()
     {
         List<string> NormalEndFlowerItems = new List<string> { "Strelitzia", "Tinglihua", "Pansy" };

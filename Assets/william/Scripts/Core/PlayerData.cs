@@ -18,6 +18,7 @@ public class PlayerData
     public List<string> flowerItems = new List<string>();
     public List<int> storyIndexes = new List<int>();
     public List<int> activeDoorIndexes = new List<int>();
+    public List<int> activeDiarys = new List<int>();
 
     public int oriJumpConut = 0;
     public bool canSplash = false;

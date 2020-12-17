@@ -66,5 +66,5 @@ public enum EGameEvents
     MapGameEnd,
 
     SetSkill,
-    
+    ShowDiary,
 }

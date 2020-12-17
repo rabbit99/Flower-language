@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cd916f36b796c44802ebb25ed745ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 2
   Pause:
     key: 27
     controllerButton: 8
